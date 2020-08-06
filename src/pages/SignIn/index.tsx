@@ -4,7 +4,8 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 
 import logoImg from '../../assets/logo.svg';
 import getValidatonErrors from '../../utils/getValidationErrors';
@@ -18,6 +19,7 @@ const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   const { user, signIn } = useAuth();
+  const { addToast } = useToast();
 
   console.log(user);
 
@@ -38,15 +40,17 @@ const SignIn: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
 
-        signIn(data);
+        await signIn(data);
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidatonErrors(err);
           formRef.current?.setErrors(errors);
         }
       }
+
+      addToast();
     },
-    [signIn],
+    [signIn, addToast],
   );
   return (
     <Container>

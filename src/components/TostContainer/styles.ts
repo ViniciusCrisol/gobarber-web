@@ -63,7 +63,7 @@ export const Toast = styled.div<ToastProps>`
   button {
     position: absolute;
     right: 16px;
-    top: 19px;
+    top: 17px;
 
     border: 0;
     opacity: 0.6;
