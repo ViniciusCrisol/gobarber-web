@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { animated } from 'react-spring';
 
 interface ToastProps {
   type?: 'success' | 'error' | 'info';
@@ -20,7 +21,7 @@ const toastTypeVariations = {
   `,
 };
 
-export const Container = styled.div<ToastProps>`
+export const Container = styled(animated.div)<ToastProps>`
   width: 360px;
   border-radius: 10px;
   padding: 16px 30px 16px 16px;
@@ -36,7 +37,7 @@ export const Container = styled.div<ToastProps>`
   ${({ type }) => toastTypeVariations[type || 'info']}
 
   > svg {
-    margin: 4px 12px 0 0;
+    margin-right: 12px;
   }
 
   div {
@@ -54,7 +55,7 @@ export const Container = styled.div<ToastProps>`
   button {
     position: absolute;
     right: 16px;
-    top: 17px;
+    top: 16px;
 
     border: 0;
     opacity: 0.6;
